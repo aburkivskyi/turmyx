@@ -1,6 +1,6 @@
 # turmyx
 
-turmyx is a script launcher for `Termux` app to link `termux-url-opener` and `termux-url-opener` with custom scripts 
+`turmyx` is a script launcher for [Termux](https://wiki.termux.com/wiki/Main_Page) app to link `termux-url-opener` and `termux-file-editor` with custom scripts 
 and cli programs. 
 
 ## Installation
@@ -8,28 +8,16 @@ and cli programs.
 turmyx is in a early state. If you want to try use it in your Termux, you can follow this minimal installation:
 
 ```
-git clone https://github.com/isman7/turmyx.git
-cd turmyx
-pip install -e .
-```
-
-Notice that `turmyx`, `turmyx-url-opener` and `turmyx-file-editor` would be wide system installed, that commands 
-gently redirect you to `turmyx opener` and `turmyx editor` commands. Also notice that `-e` flag at `pip` command will 
-link the folder to your python distribution, as it calls for "editable" flag.
-
-If you don't want this, you can simple install from git with pip: 
-
-```
 pip install git+https://github.com/isman7/turmyx.git
 ```
 
-After that, you must link Termux launcher scripts to termuyx entry points: 
+After that, you must link Termux launcher scripts to `turmyx` entry points: 
 
 ```
 cd ~
 mkdir bin
-ln -s bin/termux-url-opener $PREFIX/bin/turmyx-url-opener
-ln -s bin/termux-file-editor $PREFIX/bin/turmyx-file-editor
+ln -s $PREFIX/bin/turmyx-url-opener bin/termux-url-opener 
+ln -s $PREFIX/bin/turmyx-file-editor bin/termux-file-editor 
 ```
 
 
@@ -159,7 +147,21 @@ Options:
 
 - ~~config argument to turmyx main command.~~ config command!
 - ~~A url parser to be able to differ domains.~~ urlib.parse!
-- More than one parser/editor per url/file. With CLI input to choose.
 - ~~Additional commands such as: `add`, `remove`, etc to configure scripts from terminal, not only config file.~~
-- Possible output handlers, such as: Termux-api.
+- ~~Create docker environment~~
+- ~~Change INI to YAML~~, well both are supported now. 
+- Re-structure CLI commands:
+    - ~~Unify `turmyx opener` and `turmyx editor` into `turmyx open`, with `turmyx-open` linked.~~
+    - ~~Maintain `turmyx-file-editor`, however map to: `turmyx open file`.~~ → New `turmyx-open`.
+    - ~~Maintain `turmyx-url-opener`, however map to: `turmyx open url`.~~ → New `turmyx-open-url`.
+    - ~~New `turmyx open install`, to create the symbolic links towards `termux-url-opener` and `termux-file-editor`.~~ 
+    - Unify `turmyx add`, `turmyx remove` and `turmyx config --view` into `turmyx scripts`
+    - Create a `turmyx -f FILE_PATH --commit` flag that enables saving values from a given config file to the system
+     one. Also port here the soft-link feature. 
+- Add tests
+- Add logger
+- More than one parser/editor per url/file. With CLI input to choose.
+- Parse Termux-api ?
+- Pipelines ? 
 
+     
